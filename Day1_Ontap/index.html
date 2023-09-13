@@ -10,8 +10,9 @@
     <h2>Các kiến thức về BOM</h2>
     <img src="./imgs/Preview.jpg" alt="BOM" width="100%" height="auto" />
     <div class="card" id="card">
-      <!-- gắn nội dung vào đây bằng javascript -->
+      <!-- gắn nội dung myInfor vào đây bằng javascript -->
     </div>
+    <ul id="products"></ul>
     <script>
       var myInfor = {
         name: "HoangNM",
@@ -19,8 +20,23 @@
         address: "HN",
         languagesProgrammingLists: ["PHP", "JS", "Python", "Ruby"],
       };
+      var products = [
+        { name: "Macbook pro M2 16inch", price: 3000 },
+        {
+          name: "iphone 14 pro max",
+          price: 2000,
+        },
+        {
+          name: "Magic mouse",
+          price: 1000,
+        },
+      ];
       var cardElement = document.getElementById("card");
-      console.log(object);
+      console.log(cardElement);
+      cardElement.innerHTML = `
+      <h2>Tên: ${myInfor.name}</h2>
+      <div>Tuổi: ${myInfor.age}</div>
+      `;
     </script>
   </body>
 </html>

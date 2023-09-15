@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="myForm">
+      <label for="task" name="task">New task</label>
+      <input type="text" id="task" placeholder="please writing task..." />
+      <button onclick="submit()">Add task</button>
+    </form>
+
+    <div id="list-task">
+      <!-- them task -->
+    </div>
+    <script>
+      let task = document.getElementById("task").value;
+      let content = "";
+      function submit() {
+        // sau khi an submit thì thêm nội dung vào content
+      }
+
+      let listTaskElement = document.getElementById("list-task");
+      listTaskElement.innerHTML = content;
+    </script>
+  </body>
+</html>

@@ -6,24 +6,40 @@
     <title>Document</title>
   </head>
   <body>
-    <form id="myForm">
+    <form id="myForm" action="">
       <label for="task" name="task">New task</label>
       <input type="text" id="task" placeholder="please writing task..." />
-      <button onclick="submit()">Add task</button>
+      <button id="submit">Add task</button>
     </form>
 
     <div id="list-task">
       <!-- them task -->
     </div>
     <script>
-      let task = document.getElementById("task").value;
+      const submit = document.getElementById("submit");
+      let listTaskElement = document.getElementById("list-task");
       let content = "";
-      function submit() {
-        // sau khi an submit thì thêm nội dung vào content
+      // const formElement = document.getElementById("myForm");
+      // formElement.addEventListener("click", (e) => {
+      //   e.preventDefault();
+      // });
+
+      if (localStorage.getItem("tasks")) {
+        console.log(localStorage.getItem("tasks"));
+        listTaskElement.innerHTML = localStorage.getItem("tasks");
       }
 
-      let listTaskElement = document.getElementById("list-task");
-      listTaskElement.innerHTML = content;
+      submit.addEventListener("click", (e) => {
+        e.preventDefault();
+        const taskElement = document.getElementById("task");
+        let newContent = `<li>${task.value}</li>`;
+        content += newContent;
+        console.log(content);
+        localStorage.setItem("tasks", content);
+        listTaskElement.innerHTML = content;
+        taskElement.value = "";
+        taskElement.focus();
+      });
     </script>
   </body>
 </html>

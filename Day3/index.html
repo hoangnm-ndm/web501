@@ -18,16 +18,20 @@
     <script>
       const submit = document.getElementById("submit");
       let listTaskElement = document.getElementById("list-task");
+
+      // Kiểm tra localStorage trước
+      if (localStorage.getItem("tasks")) {
+        console.log(localStorage.getItem("tasks"));
+        listTaskElement.innerHTML = localStorage.getItem("tasks");
+      }
+
+      // Khai báo biến, element, function
+
       let content = "";
       // const formElement = document.getElementById("myForm");
       // formElement.addEventListener("click", (e) => {
       //   e.preventDefault();
       // });
-
-      if (localStorage.getItem("tasks")) {
-        console.log(localStorage.getItem("tasks"));
-        listTaskElement.innerHTML = localStorage.getItem("tasks");
-      }
 
       submit.addEventListener("click", (e) => {
         e.preventDefault();

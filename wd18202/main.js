@@ -1,6 +1,8 @@
 import "./style.css";
-import HomePage from "./src/pages/HomePage";
+import tenDathaydoi from "./src/pages/HomePage";
 import AboutPage from "./src/pages/AboutPage";
+import { Welcome as NickName, Welcome2 } from "./src/pages/HomePage";
+import ProductsList from "./src/pages/Products";
 
 // document.querySelector("#app").innerHTML = `
 //   <div>
@@ -22,4 +24,4 @@ import AboutPage from "./src/pages/AboutPage";
  */
 
 const app = document.getElementById("app");
-app.innerHTML = HomePage();
+app.innerHTML = ProductsList();

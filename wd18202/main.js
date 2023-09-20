@@ -1,8 +1,9 @@
 import "./style.css";
-import tenDathaydoi from "./src/pages/HomePage";
+import Navigo from "navigo";
+import HomePage from "./src/pages/HomePage";
 import AboutPage from "./src/pages/AboutPage";
-import { Welcome as NickName, Welcome2 } from "./src/pages/HomePage";
-import ProductsList from "./src/pages/Products";
+import Products from "./src/pages/Products";
+import AdminPage from "./src/pages/admin/AdminPage";
 
 // document.querySelector("#app").innerHTML = `
 //   <div>
@@ -23,5 +24,12 @@ import ProductsList from "./src/pages/Products";
  * "/contact" -> contact page
  */
 
+const router = new Navigo("/");
+
+router.on("/home", () => HomePage());
+router.on("/about", () => AboutPage());
+router.on("/products", () => Products());
+router.on("/admin", () => AdminPage());
+router.resolve();
 const app = document.getElementById("app");
-app.innerHTML = ProductsList();
+app.innerHTML = Products();

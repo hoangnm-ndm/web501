@@ -1,15 +1,6 @@
 const HomePage = () => `<div>Home Page</div>`;
 export default HomePage;
 
-function Welcome() {
-  return `<h1>Xin chao cac ban!</h1>`;
-}
-
-function Welcome2() {
-  return `<h1>Xin chao cac ban!</h1>`;
-}
-export { Welcome, Welcome2 };
-
 // export default function Sum(a, b) {
 //   return a + b;
 // }

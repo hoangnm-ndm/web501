@@ -24,12 +24,15 @@ import AdminPage from "./src/pages/admin/AdminPage";
  * "/contact" -> contact page
  */
 
-const router = new Navigo("/");
+const router = new Navigo("/", { linksSelector: "a" });
+const app = document.getElementById("app");
 
-router.on("/home", () => HomePage());
-router.on("/about", () => AboutPage());
+router.on("/home", () => render(app, HomePage));
+router.on("/about", () => render(app, AboutPage));
 router.on("/products", () => Products());
 router.on("/admin", () => AdminPage());
 router.resolve();
-const app = document.getElementById("app");
-app.innerHTML = Products();
+
+function render(target, content) {
+  target.innerHTML = content();
+}

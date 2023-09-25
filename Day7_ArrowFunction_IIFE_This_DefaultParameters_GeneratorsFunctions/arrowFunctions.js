@@ -1,3 +1,4 @@
+// Có 3 loại function: Exprestion function, Arrow function và Anonymous Functions
 // Naming functions
 function Sum(a, b) {
   return a + b;

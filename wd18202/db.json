@@ -1,0 +1,30 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "products": [
+    {
+      "name": "Iphone XS Max",
+      "desc": "Mo ta cho san pham iphone",
+      "price": 200,
+      "id": "Gq5HeJI"
+    },
+    {
+      "name": "Iphone 15 pro max ",
+      "desc": "Mo ta cho san pham iphone 15",
+      "price": 1500,
+      "id": "S3-2AVX"
+    }
+  ]
+}

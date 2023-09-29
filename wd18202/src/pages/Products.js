@@ -6,9 +6,10 @@ export async function GetProductsList() {
   });
   const products = await response.json();
   console.log(products);
+  ProductsList(products);
 }
 
-const ProductsList = () => `
+const ProductsList = (products) => `
 <div>
 
   ${products

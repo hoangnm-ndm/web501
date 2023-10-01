@@ -1,21 +1,13 @@
-import { products } from "../data_fake/datas";
+const Products = async () => {
+  try {
+    const res = await fetch("http://localhost:3000/products");
+    const products = await res.json();
+    console.log(products);
+    return `${products.map((product) => `<div>${product.name}</div>`).join("")}
+    `;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-export async function GetProductsList() {
-  const response = await fetch("http://localhost:3000/products", {
-    method: "GET",
-  });
-  const products = await response.json();
-  console.log(products);
-  ProductsList(products);
-}
-
-const ProductsList = (products) => `
-<div>
-
-  ${products
-    .map((product) => `<li class="product-item">${product.name}</li>`)
-    .join(" ")}
-</div>
-`;
-
-export default ProductsList;
+export default Products;

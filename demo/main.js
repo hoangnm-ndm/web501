@@ -91,11 +91,15 @@ function editProduct(id) {
 }
 
 function deleteProduct(id) {
-  fetch(`${API}/${id}`, {
-    method: "DELETE",
-  }).then(() => {
-    fetchProducts();
-  });
+  const confirmDelete = confirm("Co muon xoa khong?");
+
+  if (confirmDelete) {
+    fetch(`${API}/${id}`, {
+      method: "DELETE",
+    }).then(() => {
+      fetchProducts();
+    });
+  }
 }
 
 productForm.addEventListener("submit", addProduct);

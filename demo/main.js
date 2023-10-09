@@ -1,9 +1,12 @@
+import dotenv from "dotenv";
 const productList = document.getElementById("product-list");
 const productForm = document.getElementById("productForm");
 const productFormContent = document.getElementById("productFormContent");
 
+dotenv.config();
+const { API } = process.env;
 function fetchData() {
-  fetch("http://localhost:3000/products")
+  fetch(API)
     .then((response) => response.json())
     .then((data) => {
       renderProductList(data);
@@ -23,7 +26,7 @@ function renderProductList(products) {
 function addProduct(event) {
   event.preventDefault();
   const productName = document.getElementById("productName").value;
-  fetch("http://localhost:3000/products", {
+  fetch(API, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -41,7 +44,7 @@ function addProduct(event) {
 function editProduct(id) {
   const productName = prompt("Enter the new product name:");
   if (productName !== null) {
-    fetch(`http://localhost:3000/products/${id}`, {
+    fetch(`API/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -57,7 +60,7 @@ function editProduct(id) {
 }
 
 function deleteProduct(id) {
-  fetch(`http://localhost:3000/products/${id}`, {
+  fetch(`API/${id}`, {
     method: "DELETE",
   })
     .then(() => {

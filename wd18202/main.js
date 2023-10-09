@@ -6,6 +6,7 @@ import HomePage from "./src/pages/HomePage";
 import AboutPage from "./src/pages/AboutPage";
 import Products from "./src/pages/Products";
 import AdminPage from "./src/pages/admin/AdminPage";
+import Header from "./src/components/header";
 
 const router = new Navigo("/", { linksSelector: "a" });
 const app = document.getElementById("app");
@@ -15,6 +16,9 @@ const render = async (target, content) => {
   target.innerHTML = await content();
 };
 
+const header = document.getElementById("header");
+
+router.on(render(header, Header));
 router.on("/home", () => render(app, HomePage));
 router.on("/", () => router.navigate("/home"));
 router.on("/about", () => render(app, AboutPage));

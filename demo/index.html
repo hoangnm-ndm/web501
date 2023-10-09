@@ -1,33 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CRUD Product</title>
+    <title>Product Management</title>
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <div class="container">
-      <h1>Product List</h1>
-      <ul id="product-list"></ul>
-      <button onclick="openForm()">Add Product</button>
-    </div>
-
-    <div id="productForm" class="form-popup">
-      <form id="productFormContent">
-        <h2>Add Product</h2>
-        <label for="productName">Product Name:</label>
-        <input
-          type="text"
-          id="productName"
-          placeholder="Enter product name"
-          required
-        />
-        <button type="submit" onclick="addProduct(event)">Save</button>
-        <button type="button" onclick="closeForm()">Cancel</button>
+      <h1>Product Management</h1>
+      <form id="productForm">
+        <label for="name">Product Name:</label>
+        <input type="text" id="name" required /><br />
+        <label for="price">Price:</label>
+        <input type="number" id="price" required /><br />
+        <label for="desc">Description:</label>
+        <textarea id="desc" required></textarea><br />
+        <button type="submit">Add Product</button>
       </form>
+
+      <div id="productList"></div>
     </div>
 
-    <script src="./main.js"></script>
+    <script type="module" src="./main.js"></script>
   </body>
 </html>

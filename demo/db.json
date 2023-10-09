@@ -1,16 +1,28 @@
 {
   "products": [
     {
-      "name": "joke",
-      "id": 4
-    },
-    {
-      "name": "Steve Job",
-      "id": 5
-    },
-    {
-      "name": "san pham",
+      "name": "Iphone 17 pro max",
+      "desc": "Mo ta san pham",
+      "price": 200,
       "id": 6
+    },
+    {
+      "name": "hoang1212",
+      "price": "2005555",
+      "desc": "sdadsad",
+      "id": 7
+    },
+    {
+      "name": "hoang111",
+      "price": "200",
+      "desc": "mo ta",
+      "id": 8
+    },
+    {
+      "name": "hoang",
+      "price": "2000",
+      "desc": "sdsds",
+      "id": 9
     }
   ]
 }

@@ -1,82 +1,102 @@
-import dotenv from "dotenv";
-const productList = document.getElementById("product-list");
+const API = "http://localhost:3000/products";
+// import dotenv from "./node_modules/dotenv";
+// dotenv.config();
+// const { API } = process.env;
 const productForm = document.getElementById("productForm");
-const productFormContent = document.getElementById("productFormContent");
+const productList = document.getElementById("productList");
 
-dotenv.config();
-const { API } = process.env;
-function fetchData() {
+let editingProductId = null;
+
+function fetchProducts() {
   fetch(API)
     .then((response) => response.json())
-    .then((data) => {
-      renderProductList(data);
-    })
-    .catch((error) => console.error("Error fetching data:", error));
-}
-
-function renderProductList(products) {
-  productList.innerHTML = "";
-  products.forEach((product) => {
-    const li = document.createElement("li");
-    li.innerHTML = `${product.name} <button onclick="editProduct(${product.id})">Edit</button> <button onclick="deleteProduct(${product.id})">Delete</button>`;
-    productList.appendChild(li);
-  });
+    .then((products) => {
+      productList.innerHTML = "";
+      products.forEach((product) => {
+        const productItem = document.createElement("div");
+        productItem.innerHTML = `
+          <div>
+            <strong>Name:</strong> ${product.name} <br>
+            <strong>Price:</strong> $${product.price} <br>
+            <strong>Description:</strong> ${product.desc} <br>
+            <button onclick="editProduct(${product.id})">Edit</button>
+            <button onclick="deleteProduct(${product.id})">Delete</button>
+          </div>
+          <hr>
+        `;
+        productList.appendChild(productItem);
+      });
+    });
 }
 
 function addProduct(event) {
   event.preventDefault();
-  const productName = document.getElementById("productName").value;
-  fetch(API, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ name: productName }),
-  })
-    .then((response) => response.json())
-    .then(() => {
-      fetchData();
-      closeForm();
-    })
-    .catch((error) => console.error("Error adding product:", error));
-}
 
-function editProduct(id) {
-  const productName = prompt("Enter the new product name:");
-  if (productName !== null) {
-    fetch(`API/${id}`, {
+  const name = document.getElementById("name").value;
+  const price = document.getElementById("price").value;
+  const desc = document.getElementById("desc").value;
+
+  const newProduct = {
+    name,
+    price,
+    desc,
+  };
+
+  if (editingProductId) {
+    // Update the product if editing
+    fetch(`${API}/${editingProductId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ name: productName }),
+      body: JSON.stringify(newProduct),
     })
       .then((response) => response.json())
       .then(() => {
-        fetchData();
-      })
-      .catch((error) => console.error("Error editing product:", error));
+        fetchProducts();
+        productForm.reset();
+        editingProductId = null;
+      });
+  } else {
+    // Add a new product if not editing
+    fetch(API, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newProduct),
+    })
+      .then((response) => response.json())
+      .then(() => {
+        fetchProducts();
+        productForm.reset();
+      });
   }
 }
 
+function editProduct(id) {
+  editingProductId = id;
+
+  fetch(`${API}/${id}`)
+    .then((response) => response.json())
+    .then((product) => {
+      const nameInput = document.getElementById("name");
+      const priceInput = document.getElementById("price");
+      const descInput = document.getElementById("desc");
+
+      nameInput.value = product.name;
+      priceInput.value = product.price;
+      descInput.value = product.desc;
+    });
+}
+
 function deleteProduct(id) {
-  fetch(`API/${id}`, {
+  fetch(`${API}/${id}`, {
     method: "DELETE",
-  })
-    .then(() => {
-      fetchData();
-    })
-    .catch((error) => console.error("Error deleting product:", error));
+  }).then(() => {
+    fetchProducts();
+  });
 }
 
-function openForm() {
-  productForm.style.display = "block";
-}
-
-function closeForm() {
-  productForm.style.display = "none";
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  fetchData();
-});
+productForm.addEventListener("submit", addProduct);
+fetchProducts();
